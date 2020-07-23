@@ -4,7 +4,7 @@ let apikey = "R1tVbBqeFM1FqrcfNjgsK4YzfprI1oZ81gMlSXLb";
 function getPark(searchTerm, maxResults) {
 
   let url = 'https://developer.nps.gov/api/v1/parks?';
-  url = url + "&statecode=" + searchTerm + "&limit=" + maxResults +"&api_key=" + apikey;
+  url = url + "&stateCode=" + searchTerm + "&limit=" + maxResults +"&api_key=" + apikey;
 
   console.log(url);
 
