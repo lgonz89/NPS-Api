@@ -4,8 +4,7 @@ let apikey = "R1tVbBqeFM1FqrcfNjgsK4YzfprI1oZ81gMlSXLb";
 function getPark(searchTerm, maxResults) {
 
   let url = 'https://developer.nps.gov/api/v1/parks?';
-  url = url + "q=" + searchTerm +
-    "&limit=" + maxResults + "&api_key=" + apikey;
+  url = url + "&statecode=" + searchTerm + "&limit=" + maxResults +"&api_key=" + apikey;
 
   console.log(url);
 
@@ -34,6 +33,10 @@ function displayResults(responseJson, maxResults) {
       <p>${responseJson.data[i].description}</p>
       <p>${responseJson.data[i].url}</p>
       <a href ='${responseJson.data[i].directionsUrl}'>${responseJson.data[i].directionsUrl}</a>
+      <p> Park Address:</p>
+      <p>${responseJson.data[i].addresses[0].line1}</p><span>${responseJson.data[i].addresses[0].city},</span>
+      <span>${responseJson.data[i].addresses[0].stateCode}.</span>
+      <span>${responseJson.data[i].addresses[0].postalCode}</span>
       </li>`
 
     
