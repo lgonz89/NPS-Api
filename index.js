@@ -2,9 +2,19 @@
 let apikey = "R1tVbBqeFM1FqrcfNjgsK4YzfprI1oZ81gMlSXLb";
 
 function getPark(searchTerm, maxResults) {
-
   let url = 'https://developer.nps.gov/api/v1/parks?';
-  url = url + "&stateCode=" + searchTerm + "&limit=" + maxResults +"&api_key=" + apikey;
+
+searchTerm = searchTerm.replace(/  /g," ");// looks to see if there is two spaces and removes any double spaces
+
+  
+  let cleanArray = searchTerm.split(" "); // Creates an array and split on spaces so we can replace with commas per the api
+
+  let cleanSearch = cleanArray.join(",") //join to make a string and only adds comma before last item if more than one
+
+
+  url = url + "&stateCode=" + cleanSearch + "&limit=" + maxResults +"&api_key=" + apikey;
+
+  
 
   console.log(url);
 
@@ -20,6 +30,7 @@ function getPark(searchTerm, maxResults) {
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
+
 }
 
 function displayResults(responseJson, maxResults) {
@@ -38,8 +49,7 @@ function displayResults(responseJson, maxResults) {
       <span>${responseJson.data[i].addresses[0].stateCode}.</span>
       <span>${responseJson.data[i].addresses[0].postalCode}</span>
       </li>`
-
-    
+   
     )
   };
   //display the results section  
